@@ -1,0 +1,16 @@
+upstream php  {
+    server ${UPSTREAM_ADDR}:9000;
+}
+
+server {
+    charset utf-8;
+    client_max_body_size 128M;
+
+    listen 80;
+
+    server_name ${SERVER_ADDR};
+    root        /www/web/;
+    index       index.php;
+
+    include /etc/nginx/inc.d/locations.conf;
+}

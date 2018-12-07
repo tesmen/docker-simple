@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.14.0
+    volumes:
+      - ./src:/www
+      - ./docker/nginx/etc/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/etc/nginx/inc.d:/etc/nginx/inc.d
+    ports:
+      - 80:80
+    environment:
+      SERVER_ADDR: 'tesmo'
+      UPSTREAM_ADDR: 'php'
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/main.conf.template > /etc/nginx/conf.d/main.conf && exec nginx -g 'daemon off;'"
+    links:
+      - php
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/fpm/Dockerfile
+    volumes:
+      - ./src:/www:rw
+    working_dir: /www/
+    environment:
+      DATABASE_DSN: 'pgsql:host=postgres;port=5432;dbname=tesmo'
+      DATABASE_USER: 'tesmo'
+      DATABASE_PASSWROD: 'tesmo'
+    links:
+      - postgres
+  postgres:
+    image: postgres:10.5
+    environment:
+      POSTGRES_DB: 'tesmo'
+      POSTGRES_USER: 'tesmo'
+      POSTGRES_PASSWROD: 'tesmo'

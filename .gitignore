@@ -1,0 +1,11 @@
+# phpstorm project files
+.idea/
+
+# composer vendor dir
+src/vendor/
+
+# Mac DS_Store Files
+.DS_Store/
+
+# Skip generated files
+docker/nginx/etc/nginx/conf.d/main.conf
