@@ -30,7 +30,9 @@ services:
       - postgres
   postgres:
     image: postgres:10.5
+    ports:
+      - 15432:5432
     environment:
       POSTGRES_DB: 'tesmo'
       POSTGRES_USER: 'tesmo'
-      POSTGRES_PASSWROD: 'tesmo'
+      POSTGRES_PASSWORD: 'tesmo'
