@@ -4,7 +4,7 @@ services:
   nginx:
     image: nginx:1.14.0
     volumes:
-      - ./src:/www
+      - /Users/sergeytismenko/www/iq-auction:/www:rw
       - ./docker/nginx/etc/nginx/conf.d:/etc/nginx/conf.d
       - ./docker/nginx/etc/nginx/inc.d:/etc/nginx/inc.d
     ports:

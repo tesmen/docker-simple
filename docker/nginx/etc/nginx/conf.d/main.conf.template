@@ -8,7 +8,7 @@ server {
 
     listen 80;
 
-    server_name ${SERVER_ADDR};
+    server_name auction.local;
     root        /www/;
     index       index.php;
 
