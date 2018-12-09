@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: ./docker/php/fpm/Dockerfile
     volumes:
-      - ./src:/www:rw
+      - /Users/sergeytismenko/www/iq-auction:/www:rw
     working_dir: /www/
     environment:
       DATABASE_DSN: 'pgsql:host=postgres;port=5432;dbname=tesmo'
@@ -35,9 +35,9 @@ services:
     ports:
       - 15432:5432
     environment:
-      POSTGRES_DB: 'tesmo'
-      POSTGRES_USER: 'tesmo'
-      POSTGRES_PASSWORD: 'tesmo'
+      POSTGRES_DB: 'project'
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'password'
   mysql:
       image: mysql
       command: --default-authentication-plugin=mysql_native_password
@@ -45,6 +45,8 @@ services:
       environment:
         MYSQL_DATABASE: project
         MYSQL_ROOT_PASSWORD: password
+      ports:
+        - 15306:3306
   redis:
     image: 'bitnami/redis:latest'
     environment:
