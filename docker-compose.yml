@@ -10,7 +10,7 @@ services:
     ports:
       - 80:80
     environment:
-      SERVER_ADDR: 'tesmo'
+      SERVER_ADDR: 'auction.local'
       UPSTREAM_ADDR: 'php'
     command: /bin/bash -c "envsubst < /etc/nginx/conf.d/main.conf.template > /etc/nginx/conf.d/main.conf && exec nginx -g 'daemon off;'"
     links:
