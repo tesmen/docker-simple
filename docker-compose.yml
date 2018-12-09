@@ -28,6 +28,8 @@ services:
       DATABASE_PASSWROD: 'tesmo'
     links:
       - postgres
+      - mysql
+      - redis
   postgres:
     image: postgres:10.5
     ports:
@@ -36,3 +38,14 @@ services:
       POSTGRES_DB: 'tesmo'
       POSTGRES_USER: 'tesmo'
       POSTGRES_PASSWORD: 'tesmo'
+  mysql:
+      image: mysql
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      environment:
+        MYSQL_DATABASE: project
+        MYSQL_ROOT_PASSWORD: password
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
